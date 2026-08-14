@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#239e60"/>
+      <stop offset="50%" stop-color="#0d7f64"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+    <linearGradient id="limeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#96d332"/>
+      <stop offset="100%" stop-color="#68a619"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="105" ry="105" fill="url(#bgGrad)"/>
+
+  <g transform="translate(0, -5)">
+    <!-- Arch / Mihrab Outer Ring -->
+    <path d="M 256 52 C 345 115 385 175 385 272 C 385 282 375 286 355 286 L 157 286 C 137 286 127 282 127 272 C 127 175 167 115 256 52 Z" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+
+    <!-- Star on top -->
+    <path d="M 256 24 L 261 38 L 275 43 L 261 48 L 256 62 L 251 48 L 237 43 L 251 38 Z" fill="#96d332"/>
+
+    <!-- Left Santri (Child - White) -->
+    <circle cx=212 cy=212 r=28 fill=#ffffff/>
+    <path d="M 175 315 C 175 252 249 252 249 315 Z" fill="#ffffff"/>
+
+    <!-- Right Santri (Older Santri - Green with Peci) -->
+    <circle cx="298" cy="202" r="34" fill="url(#limeGrad)"/>
+    <path d="M 270 188 C 270 162 326 162 326 188 Z" fill="#ffffff"/>
+    <path d="M 250 315 C 250 236 346 236 346 315 Z" fill="url(#limeGrad)"/>
+
+    <!-- Open Book / Kitab -->
+    <!-- White Pages -->
+    <path d="M 125 292 Q 256 318 256 342 Q 256 318 387 292 L 380 310 Q 256 332 256 352 Q 256 332 132 310 Z" fill="#ffffff"/>
+    <!-- Green Cover -->
+    <path d="M 118 308 Q 256 348 256 363 Q 256 348 394 308 L 382 332 Q 256 367 256 377 Q 256 367 130 332 Z" fill="url(#limeGrad)"/>
+  </g>
+
+  <!-- Brand Text -->
+  <g text-anchor="middle">
+    <text x="256" y="428" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="800" font-size="64" letter-spacing="-1">
+      <tspan fill="#ffffff">Santri</tspan><tspan fill="#96d332">ku</tspan>
+    </text>
+    
+    <text x="256" y="462" font-family="'Inter', system-ui, sans-serif" font-weight="700" font-size="18" fill="#96d332" letter-spacing="3.5">
+      PORTAL WALI SANTRI
+    </text>
+    <line x1="85" y1="455" x2="122" y2="455" stroke="#96d332" stroke-width="2" opacity="0.6"/>
+    <line x1="390" y1="455" x2="427" y2="455" stroke="#96d332" stroke-width="2" opacity="0.6"/>
+  </g>
+</svg>
