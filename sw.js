@@ -1,4 +1,4 @@
-const CACHE_NAME = 'santriku-v1';
+const CACHE_NAME = 'santriku-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -13,7 +13,8 @@ const STATIC_ASSETS = [
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap',
   'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js',
   'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js',
-  'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js'
+  'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js',
+  'https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -41,7 +42,8 @@ self.addEventListener('fetch', (event) => {
     event.request.method !== 'GET' ||
     event.request.url.includes('firestore.googleapis.com') ||
     event.request.url.includes('identitytoolkit.googleapis.com') ||
-    event.request.url.includes('firebaseinstallations.googleapis.com')
+    event.request.url.includes('firebaseinstallations.googleapis.com') ||
+    event.request.url.includes('firebasestorage.googleapis.com')
   ) {
     return;
   }

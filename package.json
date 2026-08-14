@@ -1,17 +1,4 @@
 {
-  "name": "pesantrenku-portal-wali",
-  "version": "1.0.0",
-  "description": "Pesantrenku - Portal Silaturahmi & Informasi Wali Santri",
-  "main": "index.html",
-  "scripts": {
-    "start": "npx serve ."
-  },
-  "keywords": [
-    "pwa",
-    "pesantrenku",
-    "portal-wali",
-    "vercel"
-  ],
-  "author": "Pesantrenku",
-  "license": "MIT"
+  "name": "santriku",
+  "version": "1.0.0"
 }

@@ -578,10 +578,10 @@ textarea.input { min-height: 80px; resize: vertical; line-height: 1.4; }
   <nav class="nav" id="admin-nav">
     <div class="nav-inner">
       <button class="on" data-p="home" onclick="Admin.nav('home')"><span class="ic">⌂</span>Beranda</button>
+      <button data-p="santri" onclick="Admin.nav('santri')"><span class="ic">👥</span>Wali</button>
       <button data-p="kegiatan" onclick="Admin.nav('kegiatan')"><span class="ic">◈</span>Agenda</button>
       <button data-p="pengumuman" onclick="Admin.nav('pengumuman')"><span class="ic">▣</span>Info</button>
-      <button data-p="kontak" onclick="Admin.nav('kontak')"><span class="ic">☎</span>Kontak</button>
-      <button data-p="peraturan" onclick="Admin.nav('peraturan')"><span class="ic">📜</span>Peraturan</button>
+      <button data-p="peraturan" onclick="Admin.nav('peraturan')"><span class="ic">📜</span>Aturan</button>
       <button data-p="setting" onclick="Admin.nav('setting')"><span class="ic">⚙</span>Set</button>
     </div>
   </nav>
@@ -1980,36 +1980,179 @@ function adminListRenderer(store,title){
 const Admin={
   nav(p){
     document.querySelectorAll('#admin-nav button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
-    document.getElementById('adm-title').textContent={home:'Admin Panel',kegiatan:'Agenda',pengumuman:'Pengumuman',kontak:'Kontak',peraturan:'Peraturan',setting:'Pengaturan',galeri:'Galeri'}[p] || 'Pengurus';
+    document.getElementById('adm-title').textContent={home:'Admin Panel',santri:'Akun Wali',kegiatan:'Agenda',pengumuman:'Pengumuman',kontak:'Kontak',peraturan:'Peraturan',setting:'Pengaturan',galeri:'Galeri'}[p] || 'Pengurus';
     document.getElementById('adm-sub').textContent=S.tenant;
     
     if (p === 'galeri') return adminListRenderer(stores.galeri, 'Kelola Galeri Pondok')();
     if (p === 'peraturan') return adminListRenderer(stores.peraturan, 'Kelola Peraturan & Dokumen')();
+    if (p === 'santri') return this.santri();
     return this[p]();
   },
   async home(){
-    const [kg,peng,kontak,galeri,per]=await Promise.all([
+    const [kg,peng,kontak,galeri,per,allSantri]=await Promise.all([
       all(stores.portalKegiatan).catch(()=>[]),
       all(stores.pengumuman).catch(()=>[]),
       all(stores.kontak).catch(()=>[]),
       all(stores.galeri).catch(()=>[]),
-      all(stores.peraturan).catch(()=>[])
+      all(stores.peraturan).catch(()=>[]),
+      all('santri').catch(()=>[])
     ]);
+    const registeredCount = (allSantri||[]).filter(s => s && !s.deleted && (s.waliPin || s.portalWaliTerdaftar)).length;
+
     document.getElementById('adm-page').innerHTML=`
       <div class="admin-grid mt-3">
+        <button class="admin-tile" onclick="Admin.nav('santri')"><b style="color:#059669">${registeredCount}</b><span>Akun Wali</span></button>
         <button class="admin-tile" onclick="Admin.nav('kegiatan')"><b>${kg.length}</b><span>Agenda</span></button>
         <button class="admin-tile" onclick="Admin.nav('pengumuman')"><b>${peng.length}</b><span>Info</span></button>
-        <button class="admin-tile" onclick="Admin.nav('kontak')"><b>${kontak.length}</b><span>Kontak</span></button>
       </div>
       <div class="admin-grid mt-3">
+         <button class="admin-tile" onclick="Admin.nav('kontak')"><b>${kontak.length}</b><span>Kontak</span></button>
          <button class="admin-tile" onclick="Admin.nav('galeri')"><b>${galeri.length}</b><span>Galeri</span></button>
          <button class="admin-tile" onclick="Admin.nav('peraturan')"><b>${per.length}</b><span>Peraturan</span></button>
       </div>
+
+      <div class="card p-4 mt-3 mb-3" style="border-left: 4px solid var(--primary-color); cursor:pointer;" onclick="Admin.nav('santri')">
+        <div class="flex justify-between items-center">
+          <div>
+            <strong style="font-size:0.92rem; color:var(--text-main); display:block;">👥 Kelola Pendaftaran & PIN Wali Santri</strong>
+            <div class="small muted mt-1">${registeredCount} wali santri telah memiliki akun PIN aktif. Klik untuk melihat atau mereset password.</div>
+          </div>
+          <span style="color:var(--primary-color); font-weight:800; font-size:1.1rem;">→</span>
+        </div>
+      </div>
+
       <div class="section">Informasi Sistem</div>
       <div class="card p-4 small muted" style="line-height:1.5">
-        Agenda, pengumuman, kontak, galeri, dan peraturan/dokumen yang dikelola di sini ditujukan khusus untuk tampilan Portal Wali (Santriku), dan terpisah secara aman dari database absensi utama pondok.
+        Agenda, pengumuman, kontak, galeri, peraturan/dokumen, dan akun wali santri yang dikelola di sini terintegrasi langsung dengan database portal wali Santriku.
       </div>
     `;
+  },
+
+  async santri(searchQuery = '') {
+    const el = document.getElementById('adm-page');
+    el.innerHTML = '<div class="small muted text-center mt-5">Memuat data akun wali santri...</div>';
+
+    const allSantri = await all('santri');
+    const q = String(searchQuery || '').toLowerCase().trim();
+    
+    // Sort: registered first, then alphabetically by name
+    const sorted = [...(allSantri||[])].filter(s=>s && !s.deleted).sort((a, b) => {
+      if (Boolean(a.waliPin) !== Boolean(b.waliPin)) {
+        return a.waliPin ? -1 : 1;
+      }
+      return (a.nama || '').localeCompare(b.nama || '');
+    });
+
+    const filtered = q ? sorted.filter(s => 
+      (s.nama || '').toLowerCase().includes(q) ||
+      String(s.nis || '').includes(q) ||
+      (s.waliNama || '').toLowerCase().includes(q) ||
+      (s.kamar || '').toLowerCase().includes(q) ||
+      (s.waliWA || '').includes(q)
+    ) : sorted;
+
+    const totalRegistered = sorted.filter(s => s.waliPin).length;
+
+    el.innerHTML = `
+      <div class="toolbar flex justify-between items-center mb-3 mt-2">
+        <div>
+          <h2 style="font-family:var(--font-display); font-size:1.1rem; font-weight:800">Akun Wali Santri</h2>
+          <div class="small muted">${totalRegistered} dari ${sorted.length} santri telah memiliki akun PIN</div>
+        </div>
+        <button class="btn ghost" style="height:36px; padding:0 12px; font-size:0.78rem;" onclick="App.refresh()">🔄 Refresh</button>
+      </div>
+
+      <div class="card p-3 mb-3">
+        <input class="input" id="search-santri" placeholder="🔍 Cari NIS, Nama Santri, atau Wali..." value="${attr(searchQuery)}" oninput="Admin.santri(this.value)" style="min-height:38px; font-size:0.82rem;">
+      </div>
+
+      <div class="list-group mb-4">
+        ${filtered.map(s => {
+          const isReg = Boolean(s.waliPin);
+          return `
+          <div class="item">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="item-title" style="font-size:0.95rem; color:var(--text-main); font-weight:800;">${esc(s.nama || 'Santri ' + (s.nis || ''))}</div>
+                <div class="item-meta" style="font-size:0.75rem; color:var(--text-muted);">NIS: <b>${esc(s.nis || '-')}</b> · Kamar: ${esc(s.kamar || '-')} ${s.kelas ? '· ' + esc(s.kelas) : ''}</div>
+              </div>
+              <span class="pill ${isReg ? 'ok' : 'warn'}" style="font-size:0.65rem;">${isReg ? 'Terdaftar' : 'Belum Terdaftar'}</span>
+            </div>
+
+            <div style="background:var(--bg-app); border:1px solid var(--border-color-soft); border-radius:var(--radius-md); padding:10px 12px; margin-top:10px; font-size:0.8rem;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span class="muted">Nama Wali:</span>
+                <strong style="color:var(--text-main);">${esc(s.waliNama || '-')}</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span class="muted">No. WhatsApp:</span>
+                <div>
+                  ${s.waliWA ? `<a href="${waLink(s.waliWA, "Assalamu'alaikum")}" target="_blank" style="color:var(--primary-color); font-weight:700;">${esc(s.waliWA)} ↗</a>` : '<span class="muted">-</span>'}
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding-top:6px; border-top:1px dashed var(--border-color);">
+                <span class="muted" style="font-weight:700;">PIN / Password Wali:</span>
+                <div>
+                  ${isReg ? `<code style="background:var(--bg-surface); padding:3px 8px; border-radius:6px; font-weight:800; font-size:0.95rem; color:var(--primary-color); letter-spacing:2px; border:1px solid var(--border-color);">${esc(s.waliPin)}</code>` : '<span class="muted small">Belum dibuat</span>'}
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-2 mt-3" style="justify-content:flex-end;">
+              ${isReg ? `
+                <button class="btn ghost" style="height:34px; padding:0 12px; font-size:0.75rem; border-radius:var(--radius-md);" onclick="Admin.editPin('${s.id}', '${attr(s.nama || '')}', '${attr(s.waliPin || '')}')">✏️ Ganti PIN</button>
+                <button class="btn danger" style="height:34px; padding:0 12px; font-size:0.75rem; border-radius:var(--radius-md);" onclick="Admin.resetSantri('${s.id}', '${attr(s.nama || '')}')">🔄 Reset / Hapus PIN</button>
+              ` : `
+                <button class="btn ghost" style="height:34px; padding:0 12px; font-size:0.75rem; border-radius:var(--radius-md);" onclick="Admin.editPin('${s.id}', '${attr(s.nama || '')}', '')">+ Buat PIN Manual</button>
+              `}
+            </div>
+          </div>
+        `;
+        }).join('') || '<div class="item small muted text-center p-4">Tidak ada data santri yang cocok dengan pencarian.</div>'}
+      </div>
+    `;
+  },
+
+  editPin(id, nama, currentPin) {
+    Sheet.open(`
+      <h3>Ubah PIN Wali Santri</h3>
+      <div class="card p-3 mb-3">
+        <div class="item-title" style="font-size:0.95rem;">${esc(nama)}</div>
+        <div class="item-meta">Atur PIN 4-8 digit angka untuk login wali santri ini.</div>
+      </div>
+      <div class="fg">
+        <label class="label">PIN Baru (4-8 Digit Angka)</label>
+        <input class="input" id="f-new-wali-pin" inputmode="numeric" type="password" maxlength="8" placeholder="Contoh: 1234" value="${attr(currentPin || '')}">
+      </div>
+      <div class="flex gap-2 mt-4">
+        <button class="btn flex-1" onclick="Admin.saveWaliPin('${id}')">Simpan PIN</button>
+        <button class="btn ghost flex-1" onclick="Sheet.close()">Batal</button>
+      </div>
+    `);
+  },
+
+  async saveWaliPin(id) {
+    const pin = document.getElementById('f-new-wali-pin')?.value.trim();
+    if (!/^\d{4,8}$/.test(pin)) {
+      return T('Gagal: PIN harus berupa 4-8 digit angka.');
+    }
+    T('Menyimpan PIN...');
+    await setDoc('santri', id, { waliPin: pin, portalWaliTerdaftar: true, portalWaliRegisteredAt: Date.now() });
+    CacheDB.clear();
+    Sheet.close();
+    T('PIN wali santri berhasil diperbarui!');
+    this.santri();
+  },
+
+  async resetSantri(id, nama) {
+    if (!confirm(`Yakin ingin mereset akses wali untuk ${nama}?\n\nPIN akan dihapus dan wali santri dapat melakukan pendaftaran baru dari awal saat login menggunakan NIS.`)) {
+      return;
+    }
+    T('Mereset pendaftaran...');
+    await setDoc('santri', id, { waliPin: null, portalWaliTerdaftar: false });
+    CacheDB.clear();
+    T('Akun berhasil di-reset. Wali santri dapat mendaftar ulang.');
+    this.santri();
   },
   kegiatan:adminListRenderer(stores.portalKegiatan,'Kelola Agenda Pondok'),
   pengumuman:adminListRenderer(stores.pengumuman,'Kelola Pengumuman'),

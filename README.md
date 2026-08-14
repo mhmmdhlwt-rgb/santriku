@@ -1,39 +1,27 @@
-# Pesantrenku - Portal Wali Santri (PWA)
+# Santriku - Portal Silaturahmi & Informasi Wali Santri
 
-Aplikasi Web Progressive (PWA) Portal Silaturahmi Wali Santri Pondok Pesantren, siap di-deploy langsung ke **Vercel** dan di-install di Android, iOS, maupun Desktop.
+Aplikasi Web Progresif (PWA) untuk portal wali santri pondok pesantren, terintegrasi langsung dengan database absensi dan kegiatan santri.
 
-## 🚀 Fitur Utama
-- **Siap PWA (Installable)**: Dapat dipasang langsung ke Home Screen HP tanpa melalui Play Store/App Store.
-- **Support Service Worker & Offline**: Aplikasi tetap berjalan lancar walaupun koneksi internet tidak stabil.
-- **Multi-Pesantren & Multi-Sesi**: Login wali dengan NIS & PIN, serta portal admin pengurus.
-- **3D Islamic Design System**: UI modern dengan tema emerald & gold.
-- **Akademik & Catatan Kedisiplinan / Pelanggaran**: Tampilan rapi, responsif, dan lancar di-scroll pada semua layar.
+## Fitur Utama
+- **Beranda (Dashboard)**: Informasi status santri, kehadiran harian, pengumuman terbaru, tagihan administrasi, galeri dokumentasi, dan 4 tombol akses cepat Informasi Pesantren.
+- **Akademik & Catatan**: Evaluasi berkala, target hafalan, dan catatan santri (prestasi, kesehatan, kedisiplinan).
+- **Galeri Dokumentasi**: Format Bento Masonry Grid yang mempertahankan rasio asli foto (potret, lanskap, persegi) secara proporsional, dilengkapi pratinjau Lightbox layar penuh.
+- **Pusat Info & Layanan**: Pengumuman umum, agenda pondok, customer service WhatsApp, dan peraturan resmi pondok pesantren.
+- **Profil & Riwayat**: Identitas digital santri & wali santri, rekap kehadiran bulanan, dan linimasa absensi lengkap.
+- **Panel Pengurus**: Kelola agenda, pengumuman, peraturan/dokumen, kontak pengurus, galeri foto, dan PIN admin.
+- **PWA & Offline Ready**: Dapat diinstal ke homescreen Android & iOS dengan nama **Santriku**.
 
-## 📦 Struktur File Project
+## Cara Deploy ke Vercel
+
+### Opsi 1: Lewat Dashboard Vercel / GitHub
+1. Buat repository baru di GitHub (misal: `santriku-pwa`).
+2. Upload seluruh file proyek ke repository GitHub tersebut.
+3. Buka [Vercel Dashboard](https://vercel.com/new).
+4. Import repository GitHub tersebut.
+5. Klik **Deploy** (Framework Preset: *Other*).
+
+### Opsi 2: Lewat Vercel CLI
+```bash
+npm i -g vercel
+vercel
 ```
-├── index.html              # Aplikasi utama (HTML/CSS/JS)
-├── manifest.json           # Web App Manifest untuk PWA
-├── sw.js                   # Service Worker untuk caching & offline support
-├── vercel.json             # Konfigurasi Deployment Vercel
-├── package.json            # Manifest paket Node.js
-├── icon.svg                # Icon aplikasi vektor
-├── icon-192.png            # Icon PWA 192x192
-├── icon-512.png            # Icon PWA 512x512
-├── icon-512-maskable.png   # Icon PWA Maskable (Android)
-├── apple-touch-icon.png    # Icon Home Screen iOS (180x180)
-├── favicon-32x32.png       # Favicon browser 32x32
-├── favicon-16x16.png       # Favicon browser 16x16
-└── favicon.ico             # Standard ICO favicon
-```
-
-## 🌐 Cara Deploy ke Vercel
-1. Buka terminal di folder project ini.
-2. Jalankan command:
-   ```bash
-   npx vercel
-   ```
-3. Ikuti instruksi di layar. Selesai!
-
-## 📱 Cara Menginstall di HP (Android & iOS)
-- **Android (Chrome)**: Buka URL -> klik tombol "Install" pada banner atau pilih "Tambahkan ke Layar Utama".
-- **iOS (Safari)**: Buka URL -> klik tombol Share -> pilih "Add to Home Screen".
