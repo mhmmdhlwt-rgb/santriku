@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Background -->
+  <rect width="1024" height="1024" fill="#ffffff"/>
+
+  <defs>
+    <!-- Colors -->
+    <!-- Deep Emerald Green: #0c5641 -->
+    <!-- Gold / Ochre: #c59b27 -->
+    <!-- Cream / Off-White Wall: #f5f2eb -->
+    <!-- Shadow / Shading Cream: #e8e3d8 -->
+    <!-- Dark Roof Trim: #0c5641 -->
+  </defs>
+
+  <g transform="translate(0, 40)">
+    <!-- ================= MINARET (Behind right wing) ================= -->
+    <!-- Minaret Spire & Crescent -->
+    <!-- Finial -->
+    <path d="M 760 178 L 760 198" stroke="#c59b27" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="760" cy="180" r="3.5" fill="#c59b27"/>
+    <!-- Crescent Moon on Minaret -->
+    <path d="M 760 152 A 13 13 0 1 1 756 176 A 10 10 0 1 0 760 152 Z" fill="#c59b27"/>
+
+    <!-- Minaret Dome Cap -->
+    <path d="M 738 255 C 738 215 760 198 760 198 C 760 198 782 215 782 255 Z" fill="#0c5641"/>
+    <rect x="734" y="255" width="52" height="8" rx="2" fill="#c59b27"/>
+
+    <!-- Minaret Upper Balcony Tier -->
+    <rect x="740" y="263" width="40" height="70" fill="#f5f2eb"/>
+    <!-- Minaret Arched Window Upper -->
+    <path d="M 753 295 L 753 318 L 767 318 L 767 295 C 767 288 753 288 753 295 Z" fill="#0c5641"/>
+
+    <!-- Balcony Cornice -->
+    <rect x="726" y="333" width="68" height="8" fill="#0c5641"/>
+    <rect x="732" y="341" width="56" height="6" fill="#c59b27"/>
+
+    <!-- Minaret Middle Gallery with Pillars -->
+    <rect x="736" y="347" width="48" height="40" fill="#f5f2eb"/>
+    <!-- Gallery arched cutouts -->
+    <g fill="#0c5641">
+      <path d="M 739 362 C 739 356 745 356 745 362 L 745 378 L 739 378 Z"/>
+      <path d="M 748 362 C 748 356 754 356 754 362 L 754 378 L 748 378 Z"/>
+      <path d="M 757 362 C 757 356 763 356 763 362 L 763 378 L 757 378 Z"/>
+      <path d="M 766 362 C 766 356 772 356 772 362 L 772 378 L 766 378 Z"/>
+      <path d="M 775 362 C 775 356 781 356 781 362 L 781 378 L 775 378 Z"/>
+    </g>
+
+    <!-- Lower Minaret Cornice -->
+    <rect x="724" y="387" width="72" height="10" fill="#0c5641"/>
+
+    <!-- Minaret Main Shaft -->
+    <rect x="732" y="397" width="56" height="235" fill="#f5f2eb"/>
+    <path d="M 732 397 L 740 397 L 740 632 L 732 632 Z" fill="#e8e3d8"/>
+    <!-- Small arched slit window -->
+    <path d="M 757 440 C 757 435 763 435 763 440 L 763 454 L 757 454 Z" fill="#0c5641"/>
+
+
+    <!-- ================= MAIN DOME ================= -->
+    <!-- Crescent Moon & Finial on Main Dome -->
+    <!-- Finial Rod & Spheres -->
+    <path d="M 512 165 L 512 215" stroke="#c59b27" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="512" cy="180" r="7" fill="#c59b27"/>
+    <circle cx="512" cy="205" r="9" fill="#c59b27"/>
+    <!-- Crescent Moon Main -->
+    <path d="M 512 95 A 32 32 0 1 1 502 155 A 25 25 0 1 0 512 95 Z" fill="#c59b27"/>
+
+    <!-- Main Green Dome Shape -->
+    <!-- Perfect Onion / Pointed Dome Curve -->
+    <path d="M 370 385 C 360 310 405 215 512 215 C 619 215 664 310 654 385 Z" fill="#0c5641"/>
+    <!-- Lower Dome Trim / Ring -->
+    <path d="M 364 385 C 410 402 614 402 660 385 L 666 405 C 614 422 410 422 358 405 Z" fill="#0c5641"/>
+
+    <!-- Drum (Under Dome) -->
+    <rect x="390" y="405" width="244" height="75" fill="#f5f2eb"/>
+    <!-- 5 Arched Windows on Drum -->
+    <g fill="#0c5641">
+      <path d="M 406 448 L 406 430 C 406 420 420 420 420 430 L 420 448 Z"/>
+      <path d="M 452 448 L 452 430 C 452 420 466 420 466 430 L 466 448 Z"/>
+      <path d="M 505 448 L 505 430 C 505 420 519 420 519 430 L 519 448 Z"/>
+      <path d="M 558 448 L 558 430 C 558 420 572 420 572 430 L 572 448 Z"/>
+      <path d="M 604 448 L 604 430 C 604 420 618 420 618 430 L 618 448 Z"/>
+    </g>
+
+
+    <!-- ================= MOSQUE FACADE & WINGS ================= -->
+    <!-- Left Wing -->
+    <!-- Sloped Roof Left -->
+    <polygon points="214,500 342,470 342,488 214,518" fill="#0c5641"/>
+    <!-- Wall Left -->
+    <polygon points="230,515 342,488 342,650 230,642" fill="#f5f2eb"/>
+    <!-- Shading Left corner -->
+    <polygon points="230,515 250,510 250,644 230,642" fill="#e8e3d8"/>
+    <!-- Left Wing Windows (2 Arched Windows) -->
+    <g fill="#0c5641">
+      <path d="M 256 600 L 256 565 C 256 552 280 552 280 565 L 280 600 Z"/>
+      <path d="M 302 595 L 302 560 C 302 547 326 547 326 560 L 326 595 Z"/>
+    </g>
+
+    <!-- Right Wing -->
+    <!-- Sloped Roof Right -->
+    <polygon points="810,500 682,470 682,488 810,518" fill="#0c5641"/>
+    <!-- Wall Right -->
+    <polygon points="794,515 682,488 682,650 794,642" fill="#f5f2eb"/>
+    <!-- Shading Right corner -->
+    <polygon points="794,515 774,510 774,644 794,642" fill="#e8e3d8"/>
+    <!-- Right Wing Windows (2 Arched Windows) -->
+    <g fill="#0c5641">
+      <path d="M 698 595 L 698 560 C 698 547 722 547 722 560 L 722 595 Z"/>
+      <path d="M 744 600 L 744 565 C 744 552 768 552 768 565 L 768 600 Z"/>
+    </g>
+
+
+    <!-- Central Main Facade -->
+    <!-- Central Roof Cornice -->
+    <rect x="334" y="468" width="356" height="18" fill="#0c5641"/>
+    <rect x="342" y="486" width="340" height="185" fill="#f5f2eb"/>
+
+    <!-- Central Left & Right Wall Shading/Pillars -->
+    <rect x="342" y="486" width="46" height="185" fill="#f5f2eb"/>
+    <rect x="636" y="486" width="46" height="185" fill="#f5f2eb"/>
+
+    <!-- Arabic Inscription: "طلب العلم فريضة" in gold -->
+    <g text-anchor="middle">
+      <text x="512" y="508" font-family="'Amiri', 'Traditional Arabic', 'Scheherazade', 'Noto Naskh Arabic', 'Geeza Pro', serif" font-size="28" font-weight="bold" fill="#c59b27" letter-spacing="1">
+        طَـلَـبُ الْـعِـلْـمِ فَـرِيْـضَـةٌ
+      </text>
+    </g>
+
+    <!-- Central Grand Entrance Portal (Mihrab/Arch) -->
+    <!-- Outer Arch Frame -->
+    <path d="M 444 670 L 444 585 C 444 532 580 532 580 585 L 580 670 Z" fill="#0c5641"/>
+    <!-- White Reveal Trim -->
+    <path d="M 458 670 L 458 590 C 458 548 566 548 566 590 L 566 670 Z" fill="#f5f2eb"/>
+    <!-- Inner Doorway (Dark Green) -->
+    <path d="M 470 670 L 470 595 C 470 560 554 560 554 595 L 554 670 Z" fill="#0c5641"/>
+
+    <!-- Side Windows flanking the main portal -->
+    <!-- Left of Portal (Hidden under perspective/pillars) -->
+    <!-- Right of Portal -->
+
+
+    <!-- ================= GROUND CURVE ================= -->
+    <path d="M 148 680 Q 512 642 876 680 Q 512 654 148 680 Z" fill="#0c5641"/>
+  </g>
+
+  <!-- ================= TYPOGRAPHY & BRANDING ================= -->
+  <!-- "Pesantrenku" -->
+  <g text-anchor="middle">
+    <text x="512" y="780" font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', 'Segoe UI', sans-serif" font-weight="900" font-size="86" fill="#0c5641" letter-spacing="-1.5">
+      Pesantrenku
+    </text>
+
+    <!-- Subtitle: — ILMU • ADAB • AMAL — -->
+    <!-- Left Dash Line -->
+    <line x1="245" y1="816" x2="305" y2="816" stroke="#c59b27" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Tagline Text -->
+    <text x="512" y="824" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="23" fill="#c59b27" letter-spacing="9">
+      ILMU  •  ADAB  •  AMAL
+    </text>
+
+    <!-- Right Dash Line -->
+    <line x1="719" y1="816" x2="779" y2="816" stroke="#c59b27" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- ================= 8-POINTED ISLAMIC STAR EMBLEM ================= -->
+    <!-- Outer Green 8-Pointed Star (Rub el Hizb) -->
+    <g transform="translate(512, 875) scale(0.65)">
+      <!-- First Square rotated 0 -->
+      <rect x="-35" y="-35" width="70" height="70" rx="3" fill="none" stroke="#0c5641" stroke-width="9"/>
+      <!-- Second Square rotated 45 deg -->
+      <rect x="-35" y="-35" width="70" height="70" rx="3" fill="none" stroke="#0c5641" stroke-width="9" transform="rotate(45)"/>
+      
+      <!-- Center Gold Star/Diamond -->
+      <path d="M 0 -18 L 4 -4 L 18 0 L 4 4 L 0 18 L -4 4 L -18 0 L -4 -4 Z" fill="#c59b27"/>
+      <circle cx="0" cy="0" r="4.5" fill="#ffffff"/>
+      <circle cx="0" cy="0" r="2.5" fill="#c59b27"/>
+    </g>
+  </g>
+</svg>
